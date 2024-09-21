@@ -1,14 +1,18 @@
-import { Image, StyleSheet, Platform, View, Text } from 'react-native';
-import WithouGroup from '@/components/WoutGroup';
+import { Image, StyleSheet, Platform, View, Text, useColorScheme } from 'react-native';
+import WithoutGroup from '@/components/WoutGroup';
 import { useRouter } from 'expo-router';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 
 
 export default function HomeScreen() {
   const router = useRouter();
+  const colorScheme = useColorScheme();
   return (
     <View style={styles.container}>
-      <WithouGroup action={() => router.push('/createGroups') }/>
-  </View>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <WithoutGroup action={() => router.push('/createGroups') }/>
+      </ThemeProvider>
+    </View>
   );
 }
 
